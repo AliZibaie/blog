@@ -11,7 +11,7 @@
 <body>
 <div>
     <div class="container mx-auto mt-5">
-        <form action="{{ route('posts.store') }}" method="post" >
+        <form action="{{ route('posts.store') }}" method="post" class="space-y-4">
             @csrf
             <label class="text-white block text-gray-700 text-sm font-bold mb-2" for="title">
                 User id:
@@ -32,8 +32,8 @@
             <label class="text-white block text-gray-700 text-sm font-bold mb-2" for="content">
                 Content:
             </label>
-            <textarea class="text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      name="content" id="content" placeholder="content" value="{{ old('content') }}"></textarea>
+            <input type="text" class="text-white shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      name="content" id="content" placeholder="content" value="{{ old('content') }}"></input>
             @error('content')
             <div class="alert alert-danger text-red-700">{{ $message }}</div>
             @enderror
@@ -47,3 +47,4 @@
 </div>
 </body>
 </html>
+
