@@ -11,7 +11,7 @@
 <body>
 <div>
     <div class="container mx-auto mt-5">
-        <form action="{{ route('posts.create') }}" method="post" >
+        <form action="{{ route('posts.store') }}" method="post" >
             @csrf
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                    id="user_id" type="text" placeholder="user_id" name="user_id">
