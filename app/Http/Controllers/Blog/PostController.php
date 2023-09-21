@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 
 class PostController extends Controller
@@ -14,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        return view('posts.index');
     }
 
     /**
@@ -30,7 +33,14 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        dd($request->all());
+
+        try {
+            Post::query()->create($request->validated());
+            return redirect(status: 200)->route('posts.index')->with('success', 'post added successfully!');
+        }catch (Exception $e){
+            Log::error($e->getMessage());
+            return redirect(status: 500)->route('posts.create')->with('fail', 'post didnt add!');
+        }
     }
 
     /**
