@@ -12,7 +12,7 @@
 <div>
     <div class="container mx-auto mt-5">
         {{ session('fail') }}
-        <form action="{{ route('posts.update' , 'id') }}" method="post">
+        <form action="{{ route('posts.update' , $post) }}" method="post">
             @csrf
             @method('put')
             <label class="text-white block text-gray-700 text-sm font-bold mb-2" for="title">
@@ -20,7 +20,7 @@
             </label>
             <input
                 class="text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="title" type="text" placeholder="title" name="title" value="{{ old('title') }}">
+                id="title" type="text" placeholder="title" name="title" value="{{ $post->title }}">
             @error('title')
             <div class="alert alert-danger text-red-700">{{ $message }}</div>
             @enderror
@@ -29,7 +29,7 @@
             </label>
             <textarea
                 class="text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                name="content" id="content" placeholder="content" value="{{ old('content') }}"></textarea>
+                name="content" id="content" placeholder="content" value="{{ $post->content }}"></textarea>
             @error('content')
             <div class="alert alert-danger text-red-700">{{ $message }}</div>
             @enderror

@@ -22,7 +22,7 @@
             @foreach($posts as $key => $value)
                 <tr>
                     <th>#{{++$key}}</th>
-                    <td><a href='{{route("posts.edit", $value)}}'>{{$value->title}}</a></td>
+                    <td><a href='{{route("posts.edit", $value->id)}}'>{{$value->title}}</a></td>
                     <td>{{$value->content}}</td>
                     <td>{{$value->created_at}}</td>
                 </tr>

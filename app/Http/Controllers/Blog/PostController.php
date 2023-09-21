@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all()->sortBy('created_at');
-        return view('posts.index',['posts'=>$posts]);
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -39,11 +39,12 @@ class PostController extends Controller
         try {
             Post::create($request->validated());
             return redirect(status: 200)->route('posts.index')->with('success', 'post added successfully!');
-        }catch (Exception $e){
+        } catch (Exception $e) {
             Log::error($e->getMessage());
             return redirect(status: 500)->route('posts.create')->with('fail', 'post didnt add!');
         }
     }
+
     /**
      * Display the specified resource.
      */
@@ -55,9 +56,9 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
-        return view("posts/edit");
+        return view("posts/edit" , compact('post'));
     }
 
     /**
@@ -68,9 +69,9 @@ class PostController extends Controller
         try {
             $post->update($request->validated());
             return redirect(status: 200)->route('posts.index')->with('success', 'post updated successfully!');
-        }catch (Exception $e){
+        } catch (Exception $e) {
             Log::error($e->getMessage());
-            return redirect(status: 500)->route('posts.edit' , $post)->with('fail', 'post didnt update!');
+            return redirect(status: 500)->route('posts.edit', $post)->with('fail', 'post didnt update!');
         }
     }
 
