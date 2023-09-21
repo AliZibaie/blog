@@ -17,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::all()->sortBy('created_at');
+        return view('posts.index',['posts'=>$posts]);
     }
 
     /**
@@ -35,20 +36,19 @@ class PostController extends Controller
     {
 
         try {
-            Post::query()->create($request->validated());
+            Post::create($request->validated());
             return redirect(status: 200)->route('posts.index')->with('success', 'post added successfully!');
         }catch (Exception $e){
             Log::error($e->getMessage());
             return redirect(status: 500)->route('posts.create')->with('fail', 'post didnt add!');
         }
     }
-
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+        return view("posts.$id");
     }
 
     /**
@@ -56,7 +56,7 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view("posts/edit");
     }
 
     /**
