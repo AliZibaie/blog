@@ -25,6 +25,13 @@
                     <td><a href='{{route("posts.edit", $value->id)}}'>{{$value->title}}</a></td>
                     <td>{{$value->content}}</td>
                     <td>{{$value->created_at}}</td>
+                    <td>
+                    <form method="post" action="{{ route('posts.destroy', $value->id) }}">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-active" type="submit">Delete</button>
+                    </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

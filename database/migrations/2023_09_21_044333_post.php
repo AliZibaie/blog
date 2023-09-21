@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
+
         });
     }
 
