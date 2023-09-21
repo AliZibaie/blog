@@ -50,7 +50,9 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        return view("posts.$id");
+        $post = Post::query()->find($id)->getAttributes();
+
+        return view("posts.show")->with('post',$post);
     }
 
     /**
