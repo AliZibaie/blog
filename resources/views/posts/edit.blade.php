@@ -36,7 +36,7 @@
             <div class="flex justify-between items-center">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="submit">
-                    Create
+                    Edit
                 </button>
                 <button class="btn btn-primary" type="button"><a href=" {{ route('posts.index') }}">Back</a></button>
             </div>
