@@ -17,7 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    public function posts () {
+    public function posts ()
+    {
         return $this->hasMany(Post::class, 'user_id', 'id');
     }
     protected $fillable = [

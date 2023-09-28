@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::resource('posts',PostController::class);
-//Route::get('posts/show1',[PostController::class, 'showPosts']);
+Route::get('posts/showPosts',[ShowController::class, 'showPosts'])->name('posts.showPosts');
 
 require __DIR__.'/auth.php';

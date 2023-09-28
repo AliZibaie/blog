@@ -21,8 +21,8 @@
                     <tr>
                         <td>{{$post['title']}}</td>
                         <td>{{$post['content']}}</td>
-
                         <td>{{$post['created_at']}}</td>
+                        <td><a href="{{ route('posts.showPosts', $post['id']) }}"> bolbol </a></td>
                     </tr>
 
                 </tbody>

@@ -54,7 +54,6 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::query()->find($id)->getAttributes();
-
         return view("posts.show")->with('post',$post);
     }
 
@@ -94,4 +93,5 @@ class PostController extends Controller
             return redirect(status: 500)->route('posts.index', $post)->with('fail', 'post didnt delete!');
         }
     }
+
 }
