@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Mockery\Exception;
@@ -18,8 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $users = User::all();
         $posts = Post::all()->sortBy('created_at');
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts','users'));
     }
 
     /**
@@ -27,7 +29,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $users = User::all();
+        return view('posts.create',compact('users'));
     }
 
     /**

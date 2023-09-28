@@ -18,7 +18,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'title' => ['required', 'min:3'],
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            'user_id' => ['exists:users,id'],
             'content' => ['required'],
         ];
     }

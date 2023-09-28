@@ -16,8 +16,13 @@
             <label class="text-white block text-gray-700 text-sm font-bold mb-2" for="title">
                 User id:
             </label>
-            <input class="text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                   id="user_id" type="text" placeholder="user_id" name="user_id" value="{{ old('user_id') }}">
+{{--            <input class="text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"--}}
+{{--                   id="user_id" type="text" placeholder="user_id" name="user_id" value="{{ old('user_id') }}">--}}
+            <select name="user_id">
+                @foreach($users as $user)
+                    <option>{{ $user->id }}</option>
+                @endforeach
+            </select>
             @error('user_id')
             <div class="alert alert-danger text-red-700">{{ $message }}</div>
             @enderror

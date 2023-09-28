@@ -4,6 +4,7 @@
         <title>Home</title>
 @endsection
 @section('content')
+
     @if(session('success'))
         <div class="alert alert-success w-72 m-8">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
@@ -50,7 +51,16 @@
                         </div>
                     </td>
                     <td>{{$value->created_at}}</td>
+                    <td>{{$value->user_id}}</td>
+{{--                    <td>--}}
+{{--                        <select>--}}
+{{--                            @foreach($users as $user)--}}
+{{--                                <option>{{ $user->name }}</option>--}}
+{{--                            @endforeach--}}
+{{--                        </select>--}}
+{{--                    </td>--}}
                 </tr>
+
             @endforeach
             </tbody>
         </table>
