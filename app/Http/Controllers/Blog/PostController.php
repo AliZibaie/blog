@@ -19,6 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
+
         $users = User::all();
         $posts = Post::all()->sortBy('created_at');
         return view('posts.index', compact('posts','users'));
@@ -94,4 +95,10 @@ class PostController extends Controller
         }
     }
 
+    public function userPosts(User $user)
+    {
+//        dd($user->posts()->get());
+        $posts = $user->posts()->get();
+        return view('posts.userPosts' , compact('posts'));
+    }
 }

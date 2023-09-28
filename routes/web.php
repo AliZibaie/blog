@@ -3,6 +3,7 @@
 use App\Http\Controllers\Blog\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ShowController;
+use App\Http\Controllers\UserPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,9 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::resource('posts',PostController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
-Route::get('/posts/{post}',[PostController::class, 'show'])->name('posts.show');
-Route::get('/showPosts',[ShowController::class, 'showPosts'])->name('showPosts');
+//Route::resource('posts',PostController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+Route::resource('posts',PostController::class);
+Route::get('posts/userPosts/{user}', [PostController::class , 'userPosts'])->name('posts.userPosts');
+//Route::get('/posts/{post}',[PostController::class, 'show'])->name('posts.show');
+//Route::get('/showPosts',[ShowController::class, 'showPosts'])->name('showPosts');
 //Route::get('posts', [PostController::class, 'index'])->name('posts.index');
 //Route::get('posts.edit', [PostController::class, 'edit'])->name('posts.edit');
 //Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
@@ -39,5 +42,7 @@ Route::get('/showPosts',[ShowController::class, 'showPosts'])->name('showPosts')
 //Route::post('posts', [PostController::class, 'store'])->name('posts.store');
 //Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
 //Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+
 
 require __DIR__.'/auth.php';
