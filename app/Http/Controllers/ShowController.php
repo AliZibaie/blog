@@ -8,6 +8,6 @@ class ShowController extends Controller
 {
     public function showPosts()
     {
-        return view('posts.showPosts');
+        return view('showPosts');
     }
 }

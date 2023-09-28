@@ -29,7 +29,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::resource('posts',PostController::class);
-Route::get('posts/showPosts',[ShowController::class, 'showPosts'])->name('posts.showPosts');
+Route::resource('posts',PostController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+Route::get('/posts/{post}',[PostController::class, 'show'])->name('posts.show');
+Route::get('/showPosts',[ShowController::class, 'showPosts'])->name('showPosts');
+//Route::get('posts', [PostController::class, 'index'])->name('posts.index');
+//Route::get('posts.edit', [PostController::class, 'edit'])->name('posts.edit');
+//Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+//Route::get('posts.create', [PostController::class, 'create'])->name('posts.create');
+//Route::post('posts', [PostController::class, 'store'])->name('posts.store');
+//Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
+//Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 require __DIR__.'/auth.php';
