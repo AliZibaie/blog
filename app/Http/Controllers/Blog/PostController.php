@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Blog;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\filterResultRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Models\Post;
 use App\Models\User;
@@ -20,9 +21,9 @@ class PostController extends Controller
     public function index()
     {
 
-        $users = User::all();
+
         $posts = Post::all()->sortBy('created_at');
-        return view('posts.index', compact('posts','users'));
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -100,5 +101,21 @@ class PostController extends Controller
 //        dd($user->posts()->get());
         $posts = $user->posts()->get();
         return view('posts.userPosts' , compact('posts'));
+    }
+
+    public function showResult(filterResultRequest $request)
+    {
+        $validated = $request->validated();
+        $text = $validated['text'];
+        $name = $validated['filter'];
+//        $posts = Post::query()->select()->where("$name",'LIKE',"%$text%")->get();
+//        if ($name == 'title'){
+//
+//        }else{
+//            $posts = Post::query()->leftJoin('users', 'posts.user_id','=','users.id')->select()->where("$name",'LIKE',"%$text%")->get();
+//        }
+        $posts = Post::select('posts.*')->full('users', 'posts.user_id', 'users.id')->where("$name",'LIKE',"%$text%")->get()->unique();
+        dd($posts);
+        return view('posts.index', compact('posts'));
     }
 }

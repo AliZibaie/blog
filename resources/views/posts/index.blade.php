@@ -16,7 +16,32 @@
         </div>
 
     @endif
-    <div class="w-2/3 mx-auto my-20">
+    <div class="w-1/3  my-20">
+        <form action="" method="post" >
+
+            @csrf
+            <input type="hidden" name="posts" value="{{$posts}}">
+            <label>
+                @error('text')
+                <div class="alert alert-danger text-red-700">{{ $message }}</div>
+                @enderror
+                <input type="text" name="text" value="{{old('text')}}">
+            </label>
+            <label>
+                @error('filter')
+                <div class="alert alert-danger text-red-700">{{ $message }}</div>
+                @enderror
+                <select name="filter">
+                    <option selected disabled>select </option>
+                    <option value="name">by Name</option>
+                    <option value="title">by title</option>
+                </select>
+
+            </label>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
+    <div class="w-2/3 ml-auto my-20">
 
         <div class="overflow-x-auto flex justify-between items-start">
             <table class="table table-zebra">
@@ -32,6 +57,11 @@
                 </thead>
                 <tbody>
                 <!-- row 1 -->
+{{--                @if(isset($filtered))--}}
+
+{{--                    {{ $posts->filter(fn (string $post, string $key) => $post->name == 'foo') }}--}}
+{{--                @endif--}}
+
                 @foreach($posts as $post)
                     <tr>
 {{--                        <th><p class="text-lg text-white">#{{++$key}}</p></th>--}}

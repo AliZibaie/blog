@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 //Route::resource('posts',PostController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 Route::resource('posts',PostController::class);
 Route::get('posts/userPosts/{user}', [PostController::class , 'userPosts'])->name('posts.userPosts');
+Route::post('posts', [PostController::class , 'showResult'])->name('posts.showFilterResult');
+Route::get('posts/showFilterResult', [PostController::class , 'showResult'])->name('posts.showFilterResult');
 //Route::get('/posts/{post}',[PostController::class, 'show'])->name('posts.show');
 //Route::get('/showPosts',[ShowController::class, 'showPosts'])->name('showPosts');
 //Route::get('posts', [PostController::class, 'index'])->name('posts.index');
