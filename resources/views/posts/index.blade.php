@@ -35,6 +35,7 @@
                     <option selected disabled>select </option>
                     <option value="name">by Name</option>
                     <option value="title">by title</option>
+                    <option value="content">by content</option>
                 </select>
 
             </label>

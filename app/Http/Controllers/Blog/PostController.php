@@ -32,7 +32,7 @@ class PostController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('posts.create',compact('users'));
+        return view('posts.create', compact('users'));
     }
 
     /**
@@ -56,7 +56,7 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::query()->find($id)->getAttributes();
-        return view("posts.show")->with('post',$post);
+        return view("posts.show")->with('post', $post);
     }
 
     /**
@@ -64,7 +64,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view("posts/edit" , compact('post'));
+        return view("posts/edit", compact('post'));
     }
 
     /**
@@ -100,7 +100,7 @@ class PostController extends Controller
     {
 //        dd($user->posts()->get());
         $posts = $user->posts()->get();
-        return view('posts.userPosts' , compact('posts'));
+        return view('posts.userPosts', compact('posts'));
     }
 
     public function showResult(filterResultRequest $request)
@@ -108,14 +108,14 @@ class PostController extends Controller
         $validated = $request->validated();
         $text = $validated['text'];
         $name = $validated['filter'];
-//        $posts = Post::query()->select()->where("$name",'LIKE',"%$text%")->get();
-//        if ($name == 'title'){
-//
-//        }else{
-//            $posts = Post::query()->leftJoin('users', 'posts.user_id','=','users.id')->select()->where("$name",'LIKE',"%$text%")->get();
-//        }
-        $posts = Post::select('posts.*')->full('users', 'posts.user_id', 'users.id')->where("$name",'LIKE',"%$text%")->get()->unique();
-        dd($posts);
+        if ($name == 'title' || $name == 'content') {
+            $posts = Post::query()->select()->where("$name", 'LIKE', "%$text%")->get();
+        } else {
+            $posts = Post::query()->leftJoin('users', 'posts.user_id', '=', 'users.id')
+                ->select('posts.*')->where("users.$name", 'LIKE', "%$text%")->get()->unique();
+        }
+//        $posts = Post::select('posts.*')->full('users', 'posts.user_id', 'users.id')->where("$name",'LIKE',"%$text%")->get()->unique();
+//        dd($posts);
         return view('posts.index', compact('posts'));
     }
 }
