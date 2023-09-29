@@ -23,7 +23,6 @@
                 <!-- head -->
                 <thead>
                 <tr>
-                    <th class="textarea-ghost text-lg">Item</th>
                     <th class="textarea-ghost text-lg">Name</th>
                     <th class="textarea-ghost text-lg">Title</th>
                     <th class="textarea-ghost text-lg">Content</th>
@@ -33,16 +32,16 @@
                 </thead>
                 <tbody>
                 <!-- row 1 -->
-                @foreach($posts as $key => $value)
+                @foreach($posts as $post)
                     <tr>
-                        <th><p class="text-lg text-white">#{{++$key}}</p></th>
-                        <th><p class="text-lg text-white"><a href="{{ route('posts.userPosts' , $value->user_id) }}">bolbol</a></p></th>
+{{--                        <th><p class="text-lg text-white">#{{++$key}}</p></th>--}}
+                        <th><p class="text-lg text-white"><a href="{{ route('posts.userPosts' , $post->user_id) }}">{{$post->user->name}}</a></p></th>
                         <td><a class="link link-success text-lg"
-                               href=' {{ route('posts.show', $value) }}'>{{$value->title}}</a></td>
-                        <td><p class=" text-lg">{{$value->content}}</p></td>
+                               href=' {{ route('posts.show', $post) }}'>{{$post->title}}</a></td>
+                        <td><p class=" text-lg">{{$post->content}}</p></td>
                         <td>
                             <div class="flex items-center">
-                                <form method="post" action="{{ route('posts.destroy', $value->id) }}">
+                                <form method="post" action="{{ route('posts.destroy', $post->id) }}">
                                     @csrf
                                     @method('delete')
                                     <button class=" text-red-900" type="submit">
@@ -53,7 +52,7 @@
                                         </svg>
                                     </button>
                                 </form>
-                                <a href=" {{route("posts.edit", $value->id)}}" class="text-yellow-500">
+                                <a href=" {{route("posts.edit", $post->id)}}" class="text-yellow-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 16 16">
                                         <path fill="currentColor"
                                               d="M10.529 1.764a2.621 2.621 0 1 1 3.707 3.707l-.779.779L9.75 2.543l.779-.779ZM9.043 3.25L2.657 9.636a2.955 2.955 0 0 0-.772 1.354l-.87 3.386a.5.5 0 0 0 .61.608l3.385-.869a2.95 2.95 0 0 0 1.354-.772l6.386-6.386L9.043 3.25Z"/>
@@ -61,8 +60,8 @@
                                 </a>
                             </div>
                         </td>
-                        <td>{{$value->created_at}}</td>
-                        <td>{{$value->user_id}}</td>
+                        <td>{{$post->created_at}}</td>
+                        <td>{{$post->user_id}}</td>
                         {{--                    <td>--}}
                         {{--                        <select>--}}
                         {{--                            @foreach($users as $user)--}}
